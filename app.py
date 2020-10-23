@@ -56,16 +56,20 @@ class FilterSortingQueriesForm(FlaskForm):
     sp_forecast_choices = [i for (i,) in SortingQuery.query.with_entities(SortingQuery.sp_forecast).distinct()]
     badges_choices = [i for (i,) in SortingQuery.query.with_entities(SortingQuery.badges).distinct()]
     neighbours_choices = [i for (i,) in SortingQuery.query.with_entities(SortingQuery.neighbours).distinct()]
+    trap_choices = [i for (i,) in SortingQuery.query.with_entities(SortingQuery.trap).distinct()]
+    intel_choices = ['Yes' if i else 'No' for (i,) in SortingQuery.query.with_entities(SortingQuery.intel).distinct()]
+    grade_winner_choices = ['Yes' if i else 'No' for (i,) in SortingQuery.query.with_entities(SortingQuery.grade_winner).distinct()]
+    lowest_split_choices = ['Yes' if i else 'No' for (i,) in SortingQuery.query.with_entities(SortingQuery.lowest_split).distinct()]
+    post_pick_position_choices = [i for (i,) in SortingQuery.query.with_entities(SortingQuery.post_pick_position).distinct()]
     neighbours = MultiCheckboxField('Neighbours', choices=list(zip(neighbours_choices, neighbours_choices)))
     grade = MultiCheckboxField('Grades', choices=list(zip(grade_choices, grade_choices)))
-    trap = MultiCheckboxField('Trap', choices=list(zip(map(str, range(1, 7)), range(1, 7))))
-    grade_winner = MultiCheckboxField('Is grade winner?', choices=[('Yes', 'Yes'), ('No', 'No')], default='Yes')
-    lowest_split = MultiCheckboxField('Is lowest split?', choices=[('Yes', 'Yes'), ('No', 'No')], default='Yes')
-    intel = MultiCheckboxField('Is Intel?', choices=[('Yes', 'Yes'), ('No', 'No')], default='Yes')
-    post_pick_position = MultiCheckboxField('Post pick position?', choices=list(zip(map(str, range(4)), range(4))))
+    trap = MultiCheckboxField('Trap', choices=list(zip(trap_choices, trap_choices)))
+    grade_winner = MultiCheckboxField('Is grade winner?', choices=list(zip(grade_choices, grade_choices)))
+    lowest_split = MultiCheckboxField('Is lowest split?', choices=list(zip(lowest_split_choices, lowest_split_choices)))
+    intel = MultiCheckboxField('Is Intel?', choices=list(zip(intel_choices, intel_choices)))
+    post_pick_position = MultiCheckboxField('Post pick position?', choices=list(zip(post_pick_position_choices, post_pick_position_choices)))
     sp_forecast = MultiCheckboxField('Sp forecast', choices=list(zip(sp_forecast_choices, sp_forecast_choices)))
     badges = MultiCheckboxField('Badges', choices=list(zip(badges_choices, badges_choices)))
-    pass
 
 
 class SortingQueryForm(ModelForm):
