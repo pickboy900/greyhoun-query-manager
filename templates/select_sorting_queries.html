@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block style %}
+
+{% endblock %}
+
+{% block content %}
+<form method="POST" action="" class="form-inline">
+    {{ form.hidden_tag() }}
+<div class="btn-group">
+    {% for field in form %}
+        {% if field.type != 'CSRFTokenField' %}
+            {% include '_render_multiple_checkbox_field.html' %}
+        {% endif %}
+    {% endfor %}
+</div>
+<div class="col-auto">
+    <button type="submit" class="btn btn-primary">Filter</button>
+</div>
+</form>
+
+    {% include '_queries_table.html' %}
+    <p>{% if prev_url %}
+    <a href="{{ prev_url }}">Previous Page</a>
+    {% endif %}
+    {% if next_url %}
+    <a href="{{ next_url }}">Next Page</a>
+    {% endif %}</p>
+    <nav>
+
+        <ul class=pagination>
+            {%- for page in pagination.iter_pages() %}
+                <li class="page-item {% if page == pagination.page%}active{% endif %}">
+                {% if page %}
+                    {% if page != pagination.page %}
+                        <a class="page-link" href="{{ url_for('select_sorting_queries', page=page) }}">{{ page }}</a>
+                    {% else %}
+                        <span class="page-link">{{ page }}</span>
+                    {% endif %}
+                {% else %}
+                    <span class=ellipsis>…</span>
+                {% endif %}
+            {%- endfor %}
+            </li>
+
+        </ul>
+    </nav>
+{% endblock %}

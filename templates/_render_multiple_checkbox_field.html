@@ -1,0 +1,17 @@
+<div class="dropdown">
+    <div class="dropdown-menu pre-scrollable" aria-labelledby="dropdownMenuButton">
+        {% for subfield in field %}
+            <div class="dropdown-item form-group form-check">
+            {{ subfield(class="form-check-input") }}
+            {{ subfield.label(class="form-check-label") }}
+            {% if not subfield.label.text %}
+                (Empty)
+            {% endif %}
+            </div>
+
+        {% endfor %}
+    </div>
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="scrollParent">
+        {{ field.label }}
+    </button>
+</div>

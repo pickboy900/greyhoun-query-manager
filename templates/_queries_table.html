@@ -1,0 +1,36 @@
+<table class="table table-bordered table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Grade</th>
+      <th scope="col">Trap</th>
+      <th scope="col">Grade Winner</th>
+      <th scope="col">Intel</th>
+      <th scope="col">Lowest Split</th>
+      <th scope="col">Post Pick Position</th>
+      <th scope="col">Sp Forecasts</th>
+      <th scope="col">Badges</th>
+      <th scope="col">Neighbour</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+    <tbody>
+  {% for row in pagination.items %}
+    <tr>
+        <td scope="row">{{ row.id }}</td>
+        <td>{{ row.grade }}</td>
+        <td>{{ row.trap }}</td>
+        <td>{{ row.grade_winner }}</td>
+        <td>{{ row.intel }}</td>
+        <td>{{ row.lowest_split }}</td>
+        <td>{{ row.post_pick_position }}</td>
+        <td>{{ row.sp_forecast }}</td>
+        <td>{{ row.badges }}</td>
+        <td>{{ row.neighbours }}</td>
+      <td scope="col" class="btn-group"><a href="{{ url_for('edit_row', row_id=row.id, page=curr_page) }}" class="btn btn-info">Edit</a>
+      <a href="{{ url_for('delete_row', row_id=row.id, page=curr_page) }}" class="btn btn-danger">Delete</a></td>
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
